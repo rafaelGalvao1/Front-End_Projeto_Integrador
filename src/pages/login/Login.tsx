@@ -5,12 +5,15 @@ import { Link, useNavigate } from 'react-router-dom';
 import './Login.css';
 import { UsuarioLogin } from '../../model/UsuarioLogin';
 import { login } from '../../services/Service';
-import uselocalStorage from 'react-use-localstorage';
+import { useDispatch } from 'react-redux';
+import { addToken } from '../../store/tokens/actions';
+
 
 function Login() {
 
     let navigate = useNavigate();
-    const [token, setToken] = uselocalStorage('token');
+    const dispatch = useDispatch();
+    const [token, setToken] = useState('');
     const [usuarioLogin, setUsuarioLogin] = useState<UsuarioLogin>({
         id: 0,
         nome: '',
@@ -20,6 +23,15 @@ function Login() {
         token: ''
     })
 
+    const [respUsuarioLogin, setRespUsuarioLogin] = useState<UsuarioLogin>({
+        id: 0,
+        nome: '',
+        usuario: '',
+        senha: '',
+        foto: '',
+        token: ''
+    })
+    
     function updateModel(event: ChangeEvent<HTMLInputElement>) {
         setUsuarioLogin({
             ...usuarioLogin,
@@ -29,14 +41,16 @@ function Login() {
 
     useEffect(() => {
         if (token != '') {
+            dispatch(addToken(respUsuarioLogin.token))
             navigate('/home')
+
         }
-    }, [token])
+    }, [respUsuarioLogin.token])
 
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault();
         try {
-            await login(`/usuarios/logar`, usuarioLogin, setToken)
+            await login(`/usuarios/logar`, usuarioLogin, setRespUsuarioLogin)
 
             alert('Usuário logado com sucesso!');
         } catch (error) {

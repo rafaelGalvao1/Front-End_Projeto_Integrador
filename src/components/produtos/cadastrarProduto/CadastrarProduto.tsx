@@ -2,19 +2,20 @@ import React, { ChangeEvent, useEffect, useState } from 'react'
 import { Container, Typography, TextField, Button, Select, InputLabel, MenuItem, FormControl, FormHelperText } from "@material-ui/core"
 import './CadastroPost.css';
 import { useNavigate, useParams } from 'react-router-dom';
-import Tema from '../../../models/Tema';
-import Postagem from '../../../models/Postagem';
+import Categorias from '../../../model/Categorias';
+import Produtos from '../../../model/Produtos';
 import { busca, buscaId, post, put } from '../../../services/Service';
 import { useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokensReducer';
 
 
-function CadastroPost() {
+function CadastrarProduto() {
     let navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
-    const [temas, setTemas] = useState<Tema[]>([])
+    const [categorias, setCategorias] = useState<Categorias[]>([])
     const token = useSelector<TokenState, TokenState["tokens"]>(
         (state) => state.tokens
+        
       );
 
     useEffect(() => {
@@ -25,54 +26,61 @@ function CadastroPost() {
         }
     }, [token])
 
-    const [tema, setTema] = useState<Tema>(
+    const [categoria, setCategoria] = useState<Categorias>(
         {
             id: 0,
             descricao: ''
         })
-    const [postagem, setPostagem] = useState<Postagem>({
-        id: 0,
-        titulo: '',
-        texto: '',
-        tema: null
-    })
+    const [produtos, setProdutos] = useState<Produtos>({
+        id: 0, 
+    nome: '',
+    descricao: '',
+    preco: 0,      
+    validade: '',
+    regiao: '',
+    fornecedor: '',
+    unidade_de_medida: '',
+    quantidade: 0,
+    categoria: null ,
+    usuario:null ,
+    });
 
     useEffect(() => { 
-        setPostagem({
-            ...postagem,
-            tema: tema
+        setProdutos({
+            ...produtos,
+            categoria: categoria
         })
-    }, [tema])
+    }, [categoria])
 
     useEffect(() => {
-        getTemas()
+        getCategorias()
         if (id !== undefined) {
-            findByIdPostagem(id)
+            findByIdProduto(id)
         }
     }, [id])
 
-    async function getTemas() {
-        await busca("/tema", setTemas, {
+    async function getCategorias() {
+        await busca("/categorias", setCategorias, {
             headers: {
                 'Authorization': token
             }
         })
     }
 
-    async function findByIdPostagem(id: string) {
-        await buscaId(`postagens/${id}`, setPostagem, {
+    async function findByIdProduto(id: string) {
+        await buscaId(`produtos/${id}`, setProdutos, {
             headers: {
                 'Authorization': token
             }
         })
     }
 
-    function updatedPostagem(e: ChangeEvent<HTMLInputElement>) {
+    function updatedProduto(e: ChangeEvent<HTMLInputElement>) {
 
-        setPostagem({
-            ...postagem,
+        setProdutos({
+            ...produtos,
             [e.target.name]: e.target.value,
-            tema: tema
+            categoria: categoria
         })
 
     }
@@ -81,58 +89,63 @@ function CadastroPost() {
         e.preventDefault()
 
         if (id !== undefined) {
-            put(`/postagens`, postagem, setPostagem, {
+            put(`/produtos`, produtos, setProdutos, {
                 headers: {
                     'Authorization': token
                 }
             })
-            alert('Postagem atualizada com sucesso');
+            alert('Produto atualizado com sucesso');
         } else {
-            post(`/postagens`, postagem, setPostagem, {
+            post(`/produtos`, produtos, setProdutos, {
                 headers: {
                     'Authorization': token
                 }
             })
-            alert('Postagem cadastrada com sucesso');
+            alert('Produto cadastrado com sucesso');
         }
         back()
 
     }
 
     function back() {
-        navigate('/posts')
+        navigate('/produtos')
     }
 
     return (
         <Container maxWidth="sm" className="topo">
             <form onSubmit={onSubmit}>
-                <Typography variant="h3" color="textSecondary" component="h1" align="center" >Formulário de cadastro postagem</Typography>
-                <TextField value={postagem.titulo} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedPostagem(e)} id="titulo" label="titulo" variant="outlined" name="titulo" margin="normal" fullWidth />
-                <TextField value={postagem.texto} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedPostagem(e)} id="texto" label="texto" name="texto" variant="outlined" margin="normal" fullWidth />
-
-                <FormControl >
-                    <InputLabel id="demo-simple-select-helper-label">Tema </InputLabel>
-                    <Select
-                        labelId="demo-simple-select-helper-label"
-                        id="demo-simple-select-helper"
-                        onChange={(e) => buscaId(`/tema/${e.target.value}`, setTema, {
-                            headers: {
-                                'Authorization': token
-                            }
-                        })}>
-                        {
-                            temas.map(tema => (
-                                <MenuItem value={tema.id}>{tema.descricao}</MenuItem>
-                            ))
-                        }
-                    </Select>
-                    <FormHelperText>Escolha um tema para a postagem</FormHelperText>
-                    <Button type="submit" variant="contained" color="primary">
-                        Finalizar
-                    </Button>
-                </FormControl>
+                <Typography variant="h3" color="textSecondary" component="h1" align="center" >Formulário de cadastro de produtos</Typography>
+                <TextField value={produtos.nome} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedProduto(e)} id="nome" label="Nome" variant="outlined" name="nome" margin="normal" fullWidth />
+                <TextField value={produtos.descricao} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedProduto(e)} id="descricao" label="Descricao" name="descricao" variant="outlined" margin="normal" fullWidth />
+                <TextField value={produtos.preco} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedProduto(e)} id="preco" label="Preco" name="preco" variant="outlined" margin="normal" fullWidth />
+                <TextField value={produtos.validade} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedProduto(e)} id="validade" label="Validade" name="validade" variant="outlined" margin="normal" fullWidth />
+                <TextField value={produtos.regiao} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedProduto(e)} id="regiao" label="Regiao" name="regiao" variant="outlined" margin="normal" fullWidth />
+                <TextField value={produtos.fornecedor} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedProduto(e)} id="fornecedor" label="Fornecedor" name="fornecedor" variant="outlined" margin="normal" fullWidth />
+                <TextField value={produtos.unidade_de_medida} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedProduto(e)} id="unidade_de_medida" label="Unidade_De_Medida" name="unidade_de_medida" variant="outlined" margin="normal" fullWidth />
+                <TextField value={produtos.quantidade} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedProduto(e)} id="quantidade" label="Quantidade" name="quantidade" variant="outlined" margin="normal" fullWidth />
+                <FormControl fullWidth margin="normal">
+            <InputLabel id="selectCategoria">Categorias</InputLabel>
+            <Select
+              labelId="selectCategoria"
+              onChange={(event) =>
+                buscaId(`/categorias/${event.target.value}`, setCategoria, {
+                  headers: {
+                    Authorization: token,
+                  },
+                })
+              }
+            >
+              {categorias.map((categoria) => (
+                <MenuItem key={categoria.id} value={categoria.id}>
+                  {categoria.descricao}
+                </MenuItem>
+              ))}
+            </Select>
+            <FormHelperText>Escolha uma categoria para seu produto</FormHelperText>
+          </FormControl>
+              
             </form>
         </Container>
     )
 }
-export default CadastroPost;
+export default CadastrarProduto;
