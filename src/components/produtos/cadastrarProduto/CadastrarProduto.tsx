@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react'
-import { Container, Typography, TextField, Button, Select, InputLabel, MenuItem, FormControl, FormHelperText } from "@material-ui/core"
-import './CadastroPost.css';
+import { Container, Typography, TextField,  Select, InputLabel, MenuItem, FormControl, FormHelperText } from "@material-ui/core"
+import './CadastrarProduto.css';
 import { useNavigate, useParams } from 'react-router-dom';
 import Categorias from '../../../model/Categorias';
 import Produtos from '../../../model/Produtos';

@@ -1,10 +1,18 @@
 import React from "react";
-import { Height } from "@material-ui/icons";
 import {Typography, Grid, Button} from '@material-ui/core';
 import {Box} from '@mui/material';
 import './Home.css';
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { TokenState } from "../../store/tokens/tokensReducer";
+import TabProduto from "../../components/produtos/tabProduto/TabProduto";
 
 function Home(){
+    let navigate = useNavigate();
+    const token = useSelector<TokenState, TokenState["tokens"]>(
+      (state) => state.tokens
+    );
+  
     return(
         <>
         <Grid container direction="row" justifyContent="center" alignItems="center" style={{ backgroundColor: "#3F51B5" }}>
@@ -25,6 +33,7 @@ function Home(){
                 <Grid xs={12} style={{ backgroundColor: "white" }}>
                 </Grid>
             </Grid>
+            <TabProduto/>
         </>
     );
 }

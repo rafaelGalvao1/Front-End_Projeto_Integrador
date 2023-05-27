@@ -22,15 +22,6 @@ function Login() {
         foto: '',
         token: ''
     })
-
-    const [respUsuarioLogin, setRespUsuarioLogin] = useState<UsuarioLogin>({
-        id: 0,
-        nome: '',
-        usuario: '',
-        senha: '',
-        foto: '',
-        token: ''
-    })
     
     function updateModel(event: ChangeEvent<HTMLInputElement>) {
         setUsuarioLogin({
@@ -41,16 +32,16 @@ function Login() {
 
     useEffect(() => {
         if (token != '') {
-            dispatch(addToken(respUsuarioLogin.token))
+            dispatch(addToken(token))
             navigate('/home')
 
         }
-    }, [respUsuarioLogin.token])
+    }, [token])
 
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault();
         try {
-            await login(`/usuarios/logar`, usuarioLogin, setRespUsuarioLogin)
+            await login(`/usuarios/logar`, usuarioLogin, setToken)
 
             alert('Usuário logado com sucesso!');
         } catch (error) {
