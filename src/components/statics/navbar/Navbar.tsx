@@ -16,14 +16,18 @@ function Navbar(){
 
                     <Box display="flex" justifyContent="start">
                         <Box mx={1} style={{ cursor: "pointer" }}>
+                        <Link to='/home' className='text-decorator-none'>
                             <Typography variant="h6" color="inherit" >
                                 Início
                             </Typography>
+                            </Link>
                         </Box>
                         <Box mx={1} style={{ cursor: "pointer" }}>
+                        <Link to='/Produtos' className='text-decorator-none'>
                             <Typography variant="h6" color="inherit">
                                 Produtos
                             </Typography>
+                            </Link>
                         </Box>
                         <Link to='/sobre' className='text-decorator-none'>
                         <Box mx={1} style={{ cursor: "pointer", color: "white" }}>
@@ -33,9 +37,11 @@ function Navbar(){
                         </Box>
                         </Link>
                         <Box mx={1} style={{ cursor: "pointer" }}>
+                        <Link to='/produtos' className='text-decorator-none'>
                             <Typography variant="h6" color="inherit">
                                 Cadastrar Produto
                             </Typography>
+                            </Link>
                         </Box>
                         <Link to='/login' className='text-decorator-none'>
                             <Box mx={1} style={{ cursor: "pointer", color: "white" }}>

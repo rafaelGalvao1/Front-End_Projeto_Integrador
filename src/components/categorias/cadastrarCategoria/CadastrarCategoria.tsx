@@ -7,14 +7,14 @@ import { useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokensReducer';
 
 
-function CadastroCategoria() {
+function CadastrarCategoria() {
 
     let navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
     const token = useSelector<TokenState, TokenState["tokens"]>(
         (state) => state.tokens
     );
-    const [categoria, setCategoria] = useState<Categorias>({
+    const [categorias, setCategorias] = useState<Categorias>({
         id: 0,
         descricao: ''
     })
@@ -34,7 +34,7 @@ function CadastroCategoria() {
     }, [id])
 
     async function findById(id: string) {
-        buscaId(`/categorias/${id}`, setCategoria, {
+        buscaId(`/categorias/${id}`, setCategorias, {
             headers: {
                 'Authorization': token
             }
@@ -43,8 +43,8 @@ function CadastroCategoria() {
 
     function updatedCategoria(e: ChangeEvent<HTMLInputElement>) {
 
-        setCategoria({
-            ...categoria,
+        setCategorias({
+            ...categorias,
             [e.target.name]: e.target.value,
         })
 
@@ -52,23 +52,23 @@ function CadastroCategoria() {
 
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault()
-        console.log("categoria " + JSON.stringify(categoria))
+        console.log("categoria " + JSON.stringify(categorias))
 
         if (id !== undefined) {
-            console.log(categoria)
-            put(`/categorias`, categoria, setCategoria, {
+            console.log(categorias)
+            put(`/categorias`, categorias, setCategorias, {
                 headers: {
                     'Authorization': token
                 }
             })
             alert('Categoria atualizado com sucesso');
         } else {
-            post(`/categoria`, categoria, setCategoria, {
+            post(`/categoria`, categorias, setCategorias, {
                 headers: {
                     'Authorization': token
                 }
             })
-            alert('Categoria cadastrado com sucesso');
+            alert('Categoria cadastrada com sucesso');
         }
         back()
 
@@ -82,7 +82,7 @@ function CadastroCategoria() {
         <Container maxWidth="sm" className="topo">
             <form onSubmit={onSubmit}>
                 <Typography variant="h3" color="textSecondary" component="h1" align="center" >Formulário de cadastro categoria</Typography>
-                <TextField value={categoria.descricao} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedCategoria(e)} id="descricao" label="descricao" variant="outlined" name="descricao" margin="normal" fullWidth />
+                <TextField value={categorias.descricao} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedCategoria(e)} id="descricao" label="descricao" variant="outlined" name="descricao" margin="normal" fullWidth />
                 <Button type="submit" variant="contained" color="primary">
                     Finalizar
                 </Button>
@@ -91,4 +91,4 @@ function CadastroCategoria() {
     )
 }
 
-export default CadastroCategoria;
+export default CadastrarCategoria;
