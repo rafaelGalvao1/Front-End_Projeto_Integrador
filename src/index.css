@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+a{
+  color: inherit;
+}
+
+a .cadastro{
+  font-weight: 600;
+}
+
+/*img .logoImage{
+  border-radius: 100%;
+}*/
