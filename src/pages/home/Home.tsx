@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {Typography, Grid, Button} from '@material-ui/core';
 import {Box} from '@mui/material';
 import './Home.css';
@@ -10,9 +10,16 @@ import TabProduto from "../../components/produtos/tabProduto/TabProduto";
 function Home(){
     let navigate = useNavigate();
     const token = useSelector<TokenState, TokenState["tokens"]>(
-      (state) => state.tokens
+    (state) => state.tokens
     );
-  
+    
+    useEffect(() => {
+        if (token == "") {
+            alert("Você precisa estar logado")
+            navigate("/login")
+
+        }
+    }, [token])
     return(
         <>
         <Grid container direction="row" justifyContent="center" alignItems="center" style={{ backgroundColor: "#3F51B5" }}>
