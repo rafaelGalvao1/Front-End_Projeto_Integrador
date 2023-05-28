@@ -42,7 +42,7 @@ function Navbar(){
                     </Link>
                 </Box>
                 <Box mx={1} style={{ cursor: "pointer" }}>
-                <Link to='/Produtos' className='text-decorator-none'>
+                <Link to='/produtos' className='text-decorator-none'>
                     <Typography variant="h6" color="inherit">
                         Produtos
                     </Typography>
@@ -56,7 +56,7 @@ function Navbar(){
                 </Box>
                 </Link>
                 <Box mx={1} style={{ cursor: "pointer" }}>
-                <Link to='/produtos' className='text-decorator-none'>
+                <Link to='/cadastrarproduto' className='text-decorator-none'>
                     <Typography variant="h6" color="inherit">
                         Cadastrar Produto
                     </Typography>

@@ -4,7 +4,7 @@ import {Box} from '@mui/material';
 import './DeletarCategoria.css';
 import {useNavigate, useParams } from 'react-router-dom';
 import { buscaId, deleteId } from '../../../services/Service';
-import Categorias from '../../../model/Categorias';
+import Categorias from '../../../model/Categoria';
 import { useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokensReducer';
 

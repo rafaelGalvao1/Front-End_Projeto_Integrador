@@ -1,7 +1,7 @@
-import categoria from './Categorias'
+import categoria from './Categoria';
 import usuario from './Usuario';
 
-interface Categorias{
+interface Produto{
     id: 0, 
     nome: string,
     descricao: string,
@@ -13,8 +13,6 @@ interface Categorias{
     quantidade: number,
     categoria: categoria |  null,
     usuario: usuario | null,
-    
-
 }
 
-export default Categorias;
+export default Produto;
