@@ -7,7 +7,7 @@ import Produto from '../../../model/Produto';
 import { busca } from '../../../services/Service';
 import { useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokensReducer';
-
+ 
 function ListaProduto() {
   const [produtos, setProdutos] = useState<Produto[]>([])
   let navigate = useNavigate();
