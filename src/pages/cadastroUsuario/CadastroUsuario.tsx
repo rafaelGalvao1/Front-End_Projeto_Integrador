@@ -9,6 +9,7 @@ import { cadastroUsuario } from '../../services/Service';
 function CadastroUsuario() {
     let navigate = useNavigate();
     const [confirmarSenha, setConfirmarSenha] = useState<String>("")
+    const [addText, setAddText] = useState<String>("")
     const [usuario, setUsuario] = useState<Usuario>(
         {
             id: 0,
@@ -50,6 +51,9 @@ function CadastroUsuario() {
         setConfirmarSenha(e.target.value)
     }
 
+   /* function addTextField(e: ChangeEvent<HTMLInputElement>) {
+        setAddText(e.)
+    }*/
 
     function updatedModel(e: ChangeEvent<HTMLInputElement>) {
 
@@ -71,31 +75,57 @@ function CadastroUsuario() {
 
     return (
         <Grid container direction='row' justifyContent='center' alignItems='center'>
-            <Grid item xs={6} className='imagem2'></Grid>
             <Grid item xs={6} alignItems='center'>
+            <Grid container direction='row' alignItems='center'>
+            <Grid item xs={1}>
+            <img src="https://i.imgur.com/RWFhDaM.png" alt="Logo Terra Verde" className='logoImage'/>
+            </Grid>
+            <Grid item xs={2} style={{marginLeft:20}}>
+                <Typography style={{marginBottom:-5}}>
+                    Terra 
+                </Typography>
+                <Typography style={{marginLeft:3}}>
+                    Verde
+                </Typography>
+            </Grid>
+            </Grid>
                 <Box paddingX={10}>
-                    <form onSubmit={onSubmit}>
-                        <Typography variant='h3' gutterBottom color='textPrimary' component='h3' align='center' className='textos2'>Cadastrar</Typography>
+                    <Box marginBottom={7}>
+                <Typography  gutterBottom color='textPrimary'  align='left' className='textos2'>CRIE UMA CONTA</Typography>
+                        <Typography  gutterBottom color='textPrimary' align='left' className='textos3'>Entre para a comunidade mais sustentável do Brasil    </Typography>
+                        </Box>
+                    <form onSubmit={onSubmit} style={{marginBottom:40}}>
+                        
                         <TextField value={usuario.nome} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id='nome' label='Nome' variant='outlined' name='nome' margin='normal' fullWidth />
                         <TextField value={usuario.usuario} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id='usuario' label='Usuário' variant='outlined' name='usuario' margin='normal' fullWidth />
                         <TextField value={usuario.senha} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id='senha' label='Senha' variant='outlined' name='senha' margin='normal' type='password' fullWidth />
                         <TextField value={confirmarSenha} onChange={(e: ChangeEvent<HTMLInputElement>) => confirmarSenhaHandle(e)} id='confirmarSenha' label='Confirmar Senha' variant='outlined' name='confirmarSenha' margin='normal' type='password' fullWidth />
                         <TextField value={usuario.data_nascimento} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id='data_nascimento' label='Data de Nascimento' variant='outlined' name='data_nascimento' margin='normal' fullWidth />
 
-                        <Box marginTop={2} textAlign='center'>
-                            <Link to='/login' className='text-decorator-none'>
-                                <Button variant='contained' color='secondary' className='btnCancelar'>
-                                    Cancelar
-                                </Button>
-                            </Link>
-                            <Button type='submit' variant='contained' color='primary'>
-                                Cadastrar
-                            </Button>
-                        </Box>
+                        
                     </form>
+                    <Box marginTop={2} textAlign='center'>
+                        <Button type='submit' variant='contained' color='primary' className='btnCadastrar'>
+                                Criar Conta
+                            </Button>
+                        <Grid container direction='row' justifyContent='flex-start' style={{marginTop:40}}>
+                        <Typography>Já possui uma conta?</Typography>  
+                            <Link to='/login' className='text-decorator-none'>
+                                <Typography style={{paddingLeft:5, fontWeight:600  }}>Faça Login</Typography>    
+                            </Link>
+                        </Grid>
+                        <Grid container direction='row' justifyContent='center' style={{marginTop:90, marginBottom:5}}>
+                        <Typography>Possui um código de cadastro VozTech?</Typography>  
+                            <Link to=' ' className='text-decorator-none'>
+                                <Typography style={{paddingLeft:5, fontWeight:600  }}>Clique Aqui</Typography>    
+                            </Link>
+                        </Grid>
+                        </Box>
+                        
                 </Box>
+                
             </Grid>
-
+            <Grid item xs={6} className='imagem2'></Grid>
 
 
         </Grid>

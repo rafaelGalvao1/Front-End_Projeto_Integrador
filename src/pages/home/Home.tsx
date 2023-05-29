@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { TokenState } from "../../store/tokens/tokensReducer";
 import TabProduto from "../../components/produtos/tabProduto/TabProduto";
+import Perguntas from "../../components/perguntas/Perguntas";
 
 function Home(){
     let navigate = useNavigate();
@@ -26,6 +27,7 @@ function Home(){
                         </Box>
                         <Button variant="outlined" style={{ borderColor: "white", backgroundColor: "#3F51B5", color: "white" }}>Meus Produtos</Button>
                     </Box>
+                    <Perguntas/>
                 </Grid>
                 <Grid item xs={6} >
                     <img src="https://raw.githubusercontent.com/TerraVerdePI/Front-End_Projeto_Integrador/35a693784fbd471d6eec42f58e4d70af7676d7fc/src/assets/frutasHome.png" alt="" width="700px" height="500px" />
