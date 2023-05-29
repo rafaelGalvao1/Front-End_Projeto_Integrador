@@ -26,8 +26,8 @@ function Home() {
             <Grid container direction="row" justifyContent="center" alignItems="center" style={{ backgroundColor: "#14c3a2" }}>
                 <Grid alignItems="center" item xs={6}>
                     <Box paddingX={10} >
-                        <Typography variant="h3" gutterBottom color="textPrimary" component="h3" align="center" style={{ color: "white", fontWeight: "bold" }}>Seja bem vindo(a)!</Typography>
-                        <Typography variant="h5" gutterBottom color="textPrimary" component="h5" align="center" style={{ color: "white", fontWeight: "bold" }}>Cadastre seus alimentos e venda conosco!</Typography>
+                        <Typography variant="h3" gutterBottom color="textPrimary" component="h3" align="center" style={{ color: "white", fontWeight: "bold" }}>Olá!!</Typography>
+                        <Typography variant="h5" gutterBottom color="textPrimary" component="h5" align="center" style={{ color: "white", fontWeight: "bold" }}>venda aqui seus alimentos e cursos!</Typography>
                     </Box>
                     <Box display="flex" justifyContent="center">
                         <Box marginRight={1}>
@@ -41,7 +41,7 @@ function Home() {
                     </Box>
                 </Grid>
                 <Grid item xs={6} >
-                    <img src="https://raw.githubusercontent.com/TerraVerdePI/Front-End_Projeto_Integrador/35a693784fbd471d6eec42f58e4d70af7676d7fc/src/assets/frutasHome.png" alt="" width="700px" height="500px"  />
+                    <img src="https://raw.githubusercontent.com/maurilosantos/frontBlog/c5e97073d92e0fdfdce730a3a15870f87457fd01/src/assets/home.svg" alt="" width="500px" height="500px" />
                 </Grid>
                 <Grid xs={12} className='produtos'>
                     <TabProduto />

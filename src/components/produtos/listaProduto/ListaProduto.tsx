@@ -1,21 +1,19 @@
-import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import Produtos from '../../../model/Produto';
-import { busca } from '../../../services/Service'
+import React, { useEffect, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import { Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
-import './ListarProduto.css';
-import { useNavigate } from 'react-router-dom'
+import { Box } from '@mui/material';
+import './ListaProduto.css';
+import Produto from '../../../model/Produto';
+import { busca } from '../../../services/Service';
 import { useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokensReducer';
-import {Box} from '@mui/material';
 
-function ListarProduto() {
-  const [produtos, setProdutos] = useState<Produtos[]>([])
+function ListaProduto() {
+  const [produtos, setProdutos] = useState<Produto[]>([])
   let navigate = useNavigate();
   const token = useSelector<TokenState, TokenState["tokens"]>(
     (state) => state.tokens
   );
-
   useEffect(() => {
     if (token == "") {
       alert("Você precisa estar logado")
@@ -41,7 +39,7 @@ function ListarProduto() {
   return (
     <>
       {
-        produtos.map(produtos => (
+        produtos.map(produto => (
           <Box m={2} >
             <Card variant="outlined">
               <CardContent>
@@ -49,26 +47,30 @@ function ListarProduto() {
                   Produtos
                 </Typography>
                 <Typography variant="h5" component="h2">
-                  {produtos.nome}
+                  {produto.nome}
                 </Typography>
                 <Typography variant="body2" component="p">
-                  {produtos.descricao}
+                  {produto.descricao}
                 </Typography>
                 <Typography variant="body2" component="p">
-                  {produtos.categoria?.descricao}
+                  {produto.categoria?.descricao}
                 </Typography>
+                <Typography variant="body2" component="p">
+                  Fornecedor: {produto.usuario?.nome}
+                </Typography>
+
               </CardContent>
               <CardActions>
                 <Box display="flex" justifyContent="center" mb={1.5}>
 
-                  <Link to={`/cadastrarProduto/${produtos.id}`} className="text-decorator-none" >
+                  <Link to={`/formularioProduto/${produto.id}`} className="text-decorator-none" >
                     <Box mx={1}>
                       <Button variant="contained" className="marginLeft" size='small' color="primary" >
                         atualizar
                       </Button>
                     </Box>
                   </Link>
-                  <Link to={`/deletarPostagem/${produtos.id}`} className="text-decorator-none">
+                  <Link to={`/deletarProduto/${produto.id}`} className="text-decorator-none">
                     <Box mx={1}>
                       <Button variant="contained" size='small' color="secondary">
                         deletar
@@ -85,4 +87,4 @@ function ListarProduto() {
   )
 }
 
-export default ListarProduto;
+export default ListaProduto;

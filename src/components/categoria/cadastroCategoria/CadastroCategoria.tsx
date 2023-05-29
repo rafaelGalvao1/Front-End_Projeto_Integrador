@@ -1,20 +1,20 @@
 import React, { useState, useEffect, ChangeEvent } from 'react'
 import { Container, Typography, TextField, Button } from "@material-ui/core"
-import Categorias from '../../../model/Categoria';
+import Categoria from '../../../model/Categoria';
 import { buscaId, post, put } from '../../../services/Service';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokensReducer';
 
 
-function CadastrarCategoria() {
+function CadastroCategoria() {
 
     let navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
     const token = useSelector<TokenState, TokenState["tokens"]>(
         (state) => state.tokens
     );
-    const [categorias, setCategorias] = useState<Categorias>({
+    const [categoria, setCategoria] = useState<Categoria>({
         id: 0,
         descricao: ''
     })
@@ -34,7 +34,7 @@ function CadastrarCategoria() {
     }, [id])
 
     async function findById(id: string) {
-        buscaId(`/categorias/${id}`, setCategorias, {
+        buscaId(`/categorias/${id}`, setCategoria, {
             headers: {
                 'Authorization': token
             }
@@ -43,8 +43,8 @@ function CadastrarCategoria() {
 
     function updatedCategoria(e: ChangeEvent<HTMLInputElement>) {
 
-        setCategorias({
-            ...categorias,
+        setCategoria({
+            ...categoria,
             [e.target.name]: e.target.value,
         })
 
@@ -52,18 +52,18 @@ function CadastrarCategoria() {
 
     async function onSubmit(e: ChangeEvent<HTMLFormElement>) {
         e.preventDefault()
-        console.log("categoria " + JSON.stringify(categorias))
+        console.log("categoria " + JSON.stringify(categoria))
 
         if (id !== undefined) {
-            console.log(categorias)
-            put(`/categorias`, categorias, setCategorias, {
+            console.log(categoria)
+            put(`/categorias`, categoria, setCategoria, {
                 headers: {
                     'Authorization': token
                 }
             })
-            alert('Categoria atualizado com sucesso');
+            alert('Categoria atualizada com sucesso');
         } else {
-            post(`/categoria`, categorias, setCategorias, {
+            post(`/categorias`, categoria, setCategoria, {
                 headers: {
                     'Authorization': token
                 }
@@ -75,14 +75,14 @@ function CadastrarCategoria() {
     }
 
     function back() {
-        navigate('/Categorias')
+        navigate('/categorias')
     }
 
     return (
         <Container maxWidth="sm" className="topo">
             <form onSubmit={onSubmit}>
-                <Typography variant="h3" color="textSecondary" component="h1" align="center" >Formulário de cadastro categoria</Typography>
-                <TextField value={categorias.descricao} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedCategoria(e)} id="descricao" label="descricao" variant="outlined" name="descricao" margin="normal" fullWidth />
+                <Typography variant="h3" color="textSecondary" component="h1" align="center" >Formulário de cadastro Categoria</Typography>
+                <TextField value={categoria.descricao} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedCategoria(e)} id="descricao" label="descricao" variant="outlined" name="descricao" margin="normal" fullWidth />
                 <Button type="submit" variant="contained" color="primary">
                     Finalizar
                 </Button>
@@ -91,4 +91,4 @@ function CadastrarCategoria() {
     )
 }
 
-export default CadastrarCategoria;
+export default CadastroCategoria;

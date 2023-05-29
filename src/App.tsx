@@ -1,46 +1,58 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navbar from './components/statics/navbar/Navbar';
+import Home from './paginas/home/Home';
 import Footer from './components/statics/footer/Footer';
-import Home from './pages/home/Home';
-import './App.css';
-import Login from './pages/login/Login';
-import Sobre from './pages/sobre/Sobre';
-import CadastroUsuario from './pages/cadastroUsuario/CadastroUsuario';
-import { Provider } from "react-redux";
-import store from './store/store';
-import CadastrarProduto from './components/produtos/cadastrarProduto/CadastrarProduto';
-import ListarProduto from './components/produtos/listarProduto/ListarProduto';
-import ListarCategoria from './components/categorias/ListarCategoria/ListarCategoria';
-import CadastrarCategoria from './components/categorias/cadastrarCategoria/CadastrarCategoria';
+import './App.css'
+import Login from './paginas/login/Login';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import CadastroUsuario from './paginas/cadastroUsuario/CadastroUsuario';
+import ListaCategoria from './components/categoria/listaCategoria/ListaCategoria';
+import ListaProduto from './components/produtos/listaProduto/ListaProduto';
+import CadastroProduto from './components/produtos/cadastroProduto/CadastroProduto';
+import CadastroCategoria from './components/categoria/cadastroCategoria/CadastroCategoria';
 import DeletarProduto from './components/produtos/deletarProduto/DeletarProduto';
-import DeletarCategoria from './components/categorias/deletarCategoria/DeletarCategoria';
+import DeletarCategoria from './components/categoria/deletarCategoria/DeletarCategoria';
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 
 function App() {
   return (
-    <Provider store={store}>
-    <Router>
-      <Navbar />
-      <Routes>
-      <Route path="/" element={<Login />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/sobre" element={<Sobre />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/cadastro" element={<CadastroUsuario />} />
-            <Route path="/produtos" element={<ListarProduto />} />
-            <Route path="/categorias" element={<ListarCategoria />} />
-            <Route path="/cadastrarProduto" element={<CadastrarProduto />} />
-            <Route path="/cadastrarProduto/:id" element={<CadastrarProduto />} />
-            <Route path="/cadastrarCategoria" element={<CadastrarCategoria />} />
-            <Route path="/cadastrarCategoria/:id" element={<CadastrarCategoria />} />
-            <Route path="/deletarProduto/:id" element={<DeletarProduto />} />
-            <Route path="/deletarCategoria/:id" element={<DeletarCategoria />} />
-      </Routes>
-      <Footer />
-    </Router>
-    </Provider>
-);
+    < >
+      <Provider store={store}>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<Login />} />
+
+          <Route path='/login' element={<Login />} />
+
+          <Route path='/home' element={<Home />} />
+
+          <Route path="/cadastrousuario" element={<CadastroUsuario />} />
+
+          <Route path="/categorias" element={<ListaCategoria />} />
+
+          <Route path="/produtos" element={<ListaProduto />} />
+
+          <Route path="/formularioProduto" element={<CadastroProduto />} />
+
+          <Route path="/formularioProduto/:id" element={<CadastroProduto />} />
+
+          <Route path="/formularioCategoria" element={<CadastroCategoria />} />
+
+          <Route path="/formularioCategoria/:id" element={<CadastroCategoria />} />
+
+          <Route path="/deletarProduto/:id" element={<DeletarProduto />} />
+
+          <Route path="/deletarCategoria/:id" element={<DeletarCategoria />} />
+
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+      </Provider>
+    </>
+  );
 }
 
-export default App;
+export default App

@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from 'react'
-import { Typography, Button, Card, CardActions, CardContent } from "@material-ui/core"
+import { Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
 import { Box } from '@mui/material';
-import './DeletarProduto.css';
-import { useNavigate, useParams } from 'react-router-dom'
-import Produto from '../../../model/Produto';
+import './DeletarCategoria.css';
+import { useNavigate, useParams } from 'react-router-dom';
 import { buscaId, deleteId } from '../../../services/Service';
+import Categoria from '../../../model/Categoria';
 import { useSelector } from 'react-redux';
 import { TokenState } from '../../../store/tokens/tokensReducer';
 
-function DeletarProduto() {
+
+function DeletarCategoria() {
     let navigate = useNavigate();
     const { id } = useParams<{ id: string }>();
     const token = useSelector<TokenState, TokenState["tokens"]>(
         (state) => state.tokens
     );
-    const [produto, setProdutos] = useState<Produto>()
+    const [categoria, setCategoria] = useState<Categoria>()
 
     useEffect(() => {
         if (token == "") {
@@ -31,7 +32,7 @@ function DeletarProduto() {
     }, [id])
 
     async function findById(id: string) {
-        buscaId(`/produtos/${id}`, setProdutos, {
+        buscaId(`/categorias/${id}`, setCategoria, {
             headers: {
                 'Authorization': token
             }
@@ -39,32 +40,32 @@ function DeletarProduto() {
     }
 
     function sim() {
-        navigate('/produtos')
-        deleteId(`/produtos/${id}`, {
+        navigate('/categorias')
+        deleteId(`/categorias/${id}`, {
             headers: {
                 'Authorization': token
             }
         });
-        alert('Produto deletado com sucesso');
+        alert('Categoria deletada com sucesso!');
     }
 
     function nao() {
-        navigate('/produtos')
+        navigate('/categorias')
     }
+
     return (
         <>
             <Box m={2}>
-                <Card variant="outlined" >
+                <Card variant="outlined">
                     <CardContent>
                         <Box justifyContent="center">
                             <Typography color="textSecondary" gutterBottom>
-                                Deseja deletar o produto:
+                                Deseja deletar a Categoria:
                             </Typography>
-                            <Typography color="textSecondary" >
-                                {produto?.nome}
+                            <Typography color="textSecondary">
+                                {categoria?.descricao}
                             </Typography>
                         </Box>
-
                     </CardContent>
                     <CardActions>
                         <Box display="flex" justifyContent="start" ml={1.0} mb={2} >
@@ -73,7 +74,7 @@ function DeletarProduto() {
                                     Sim
                                 </Button>
                             </Box>
-                            <Box>
+                            <Box mx={2}>
                                 <Button onClick={nao} variant="contained" size='large' color="secondary">
                                     Não
                                 </Button>
@@ -85,4 +86,4 @@ function DeletarProduto() {
         </>
     );
 }
-export default DeletarProduto;
+export default DeletarCategoria;
