@@ -9,7 +9,7 @@ import { cadastroUsuario } from '../../services/Service';
 function CadastroUsuario() {
     let navigate = useNavigate();
     const [confirmarSenha, setConfirmarSenha] = useState<String>("")
-    const [addText, setAddText] = useState<String>("")
+    const [vozTech, setVozTech] = useState(false);
     const [usuario, setUsuario] = useState<Usuario>(
         {
             id: 0,
@@ -25,6 +25,13 @@ function CadastroUsuario() {
             status_eco: ''
         })
 
+        function addText (){
+            if(vozTech==false){
+                setVozTech(true)
+            } else {
+                setVozTech(false)
+            }
+        }
     const [userResult, setUserResult] = useState<Usuario>(
         {
             id: 0,
@@ -51,9 +58,7 @@ function CadastroUsuario() {
         setConfirmarSenha(e.target.value)
     }
 
-   /* function addTextField(e: ChangeEvent<HTMLInputElement>) {
-        setAddText(e.)
-    }*/
+    
 
     function updatedModel(e: ChangeEvent<HTMLInputElement>) {
 
@@ -101,7 +106,8 @@ function CadastroUsuario() {
                         <TextField value={usuario.senha} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id='senha' label='Senha' variant='outlined' name='senha' margin='normal' type='password' fullWidth />
                         <TextField value={confirmarSenha} onChange={(e: ChangeEvent<HTMLInputElement>) => confirmarSenhaHandle(e)} id='confirmarSenha' label='Confirmar Senha' variant='outlined' name='confirmarSenha' margin='normal' type='password' fullWidth />
                         <TextField value={usuario.data_nascimento} onChange={(e: ChangeEvent<HTMLInputElement>) => updatedModel(e)} id='data_nascimento' label='Data de Nascimento' variant='outlined' name='data_nascimento' margin='normal' fullWidth />
-
+                        {vozTech == true && <TextField id='voz_tech' label='Código VozTech' variant='outlined' name='vozTech' margin='normal' fullWidth />}
+                        
                         
                     </form>
                     <Box marginTop={2} textAlign='center'>
@@ -116,7 +122,7 @@ function CadastroUsuario() {
                         </Grid>
                         <Grid container direction='row' justifyContent='center' style={{marginTop:90, marginBottom:5}}>
                         <Typography>Possui um código de cadastro VozTech?</Typography>  
-                            <Link to=' ' className='text-decorator-none'>
+                            <Link to=' ' className='text-decorator-none' onClick={addText}>
                                 <Typography style={{paddingLeft:5, fontWeight:600  }}>Clique Aqui</Typography>    
                             </Link>
                         </Grid>
