@@ -9,6 +9,7 @@ export interface Usuario{
     data_nascimento: string,
     cpf: string,
     cnpj: string,
+    cep: string,
     endereco: string,
     status_eco: string,
     produto?: Produto[] //linha adicionada para que o usuário possa ter uma postagem vinculada

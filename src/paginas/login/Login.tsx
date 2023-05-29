@@ -23,6 +23,12 @@ function Login() {
         usuario: '',
         senha: '',
         foto: '',
+        data_nascimento: '',
+        cpf: '',
+        cnpj: '',
+        cep: '', 
+        endereco: '',
+        status_eco: '',
         token: ''
     })
     
