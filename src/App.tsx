@@ -14,16 +14,19 @@ import DeletarProduto from './components/produtos/deletarProduto/DeletarProduto'
 import DeletarCategoria from './components/categoria/deletarCategoria/DeletarCategoria';
 import { Provider } from 'react-redux';
 import store from './store/store';
-
+import LadingPage from './paginas/ladingPage/LadingPage';
 
 function App() {
   return (
     < >
+      
       <Provider store={store}>
       <BrowserRouter>
         <Navbar />
+        
         <Routes>
-          <Route path='/' element={<Login />} />
+          
+          <Route path='/' element={<LadingPage />} />
 
           <Route path='/login' element={<Login />} />
 
@@ -49,6 +52,7 @@ function App() {
 
         </Routes>
         <Footer />
+        
       </BrowserRouter>
       </Provider>
     </>

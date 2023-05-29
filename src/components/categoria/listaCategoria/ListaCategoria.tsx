@@ -23,7 +23,7 @@ function ListaCategoria() {
     }, [token])
 
 
-    async function getCategoria() {
+    async function getCategorias() {
         await busca("/categorias", setCategorias, {
             headers: {
                 'Authorization': token
@@ -33,7 +33,7 @@ function ListaCategoria() {
 
 
     useEffect(() => {
-        getCategoria()
+        getCategorias()
     }, [categorias.length])
 
 
