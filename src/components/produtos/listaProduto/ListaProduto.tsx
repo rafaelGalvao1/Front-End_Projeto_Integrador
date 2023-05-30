@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Card, CardActions, CardContent, Button, Typography } from '@material-ui/core';
-import { Box } from '@mui/material';
+import { Box, Grid } from '@mui/material';
 import './ListaProduto.css';
 import Produto from '../../../model/Produto';
 import { busca } from '../../../services/Service';
@@ -14,6 +14,10 @@ function ListaProduto() {
   const token = useSelector<TokenState, TokenState["tokens"]>(
     (state) => state.tokens
   );
+
+  const [quantidadeCards, setQuantidadeCards] = useState(9);
+
+
   useEffect(() => {
     if (token == "") {
       alert("Você precisa estar logado")
@@ -38,8 +42,11 @@ function ListaProduto() {
 
   return (
     <>
+      <div style={{ textAlign: 'center' }}>
+      <Grid container spacing={2}>
       {
-        produtos.map(produto => (
+        produtos.slice(0, quantidadeCards).map(produto => (
+          <Grid item xs={12} sm={6} md={4} key={produto.id}>
           <Box m={2} >
             <Card variant="outlined">
               <CardContent>
@@ -81,10 +88,22 @@ function ListaProduto() {
               </CardActions>
             </Card>
           </Box>
-        ))
+          </Grid>))
       }
+      </Grid>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={() => setQuantidadeCards(quantidadeCards + 9)}
+        style={{margin: 10}}
+        
+      >
+          Carregar Mais
+      </Button>
+      </div>
     </>
   )
 }
+
 
 export default ListaProduto;
