@@ -15,38 +15,59 @@ function Footer() {
 
     var footerComponent;
 
-    if (token != "") {
+    if (token == "") {
         footerComponent = <Grid container direction="row" justifyContent="center" alignItems="center">
         <Grid alignItems="center" item xs={12}>
-            <Box style={{ backgroundColor: "#595b5a", height: "120px" }}>
-                <Box paddingTop={1} display="flex" alignItems="center" justifyContent="center">
-                    <Typography variant="h6" align="center" gutterBottom style={{ color: "white" }}>Siga-nos nas redes sociais </Typography>
+            <Box style={{ backgroundColor: "#595b5a", height: "200px" }}>
+            <Box display="flex" alignItems="center" justifyContent="center">
+            <img src="https://i.imgur.com/x9HTU0N.png"style={{ fontSize: 60, width:"100px"}} />
                 </Box>
                 <Box display="flex" alignItems="center" justifyContent="center">
-                    <a href="https://www.facebook.com/generationbrasil" target="_blank">
-                        <FacebookIcon style={{ fontSize: 60, color: "white", width:"40px" }} />
+                    <Typography  align="center" gutterBottom style={{ color: "white", fontSize:"14px"}}>Fornecendo alimentação saudável <br/>
+e de qualidade a preços acessíveis</Typography>
+
+                </Box>
+                <Box display="flex" alignItems="center" justifyContent="center">
+                    <a href="https://github.com/TerraVerdePI" target="_blank">
+                        <img src="https://i.imgur.com/tlZGgqM.png" style={{ fontSize: 60, color: "white", width:"40px",padding:3 }} />
                     </a>
-                    <a href="https://www.instagram.com/generationbrasil/" target="_blank">
-                        <InstagramIcon style={{ fontSize: 60, color: "white", width:"40px"}} />
+                    <a href="https://www.instagram.com/terraverdepi/" target="_blank">
+                        <img src="https://i.imgur.com/29COrY3.png" style={{ fontSize: 60, color: "white", width:"40px",padding:3}} />
+                    </a>
+                    <a href="https://linktr.ee/TerraVerdee" target="_blank">
+                        <img src="https://i.imgur.com/vQHX1kx.png"style={{ fontSize: 60, color: "white", width:"40px",padding:3 }} />
                     </a>
                     <a href="https://www.linkedin.com/school/generationbrasil/" target="_blank">
-                        <LinkedInIcon style={{ fontSize: 60, color: "white", width:"40px" }} />
+                        <img src="https://i.imgur.com/fa34SzQ.png"style={{ fontSize: 60, color: "white", width:"47px",padding:3 }} />
                     </a>
                 </Box>
             </Box>
             <Box style={{ backgroundColor: "#4c4d4c", height: "60px" }}>
                 <Box paddingTop={1}>
-                    <Typography variant="subtitle2" align="center" gutterBottom style={{ color: "white" }} >© 2023 Copyright:</Typography>
+                    <Typography variant="subtitle2" align="center" gutterBottom style={{ color: "white" }} >® MARCA REGISTRADA</Typography>
                 </Box>
                 <Box>
                     <a target="_blank" style={{textDecoration: "none"}} href="https://brasil.generation.org">
-                        <Typography variant="subtitle2" gutterBottom style={{ color: "white" }} align="center">brasil.generation.org</Typography>
+                        <Typography variant="subtitle2" gutterBottom style={{ color: "white" }} align="center">Todos os direitos reservados</Typography>
                     </a>
                 </Box>
             </Box>
         </Grid>
     </Grid>
 
+    }else{
+        footerComponent = <Grid container direction="row"  alignItems="flex-start">
+        <Grid alignItems="flex-start" item xs={12}>
+        <Box style={{ backgroundColor: "#595b5a", height: "52px" }}>
+        <Box display="flex" alignItems="flex-start" marginLeft={2}>
+            <img src="https://i.imgur.com/x9HTU0N.png"style={{ fontSize: 60, width:"50px", marginLeft:2, marginRight:15}} />
+        
+                    <Typography align="center" style={{ color: "white", fontSize:"16px", alignSelf:"center"}} >® MARCA REGISTRADA. Todos os direitos reservados</Typography>
+                    </Box>
+                    </Box>
+                    
+            </Grid>
+            </Grid> 
     }
 
     
