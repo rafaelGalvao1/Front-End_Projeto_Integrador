@@ -47,7 +47,7 @@ function ListaCategoria() {
                     {
                         categorias.slice(0, quantidadeCards).map(categoria => (
                             <Box m={2} >
-                                <Card variant="outlined">
+                                <Card style={{margin: 10, marginTop: 15}} variant="outlined">
                                     <CardContent>
                                         <Typography color="textSecondary" gutterBottom>
                                             Categoria
